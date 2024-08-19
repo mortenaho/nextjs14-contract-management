@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react";
-import loginValidationSchema from "./login-validation";
+import loginValidationSchema from "../../util/form-validation/login-validation";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Token } from "@/app/dtos/response/token";
