@@ -10,26 +10,28 @@ import { useRouter } from "next/navigation";
 import { GeneralResponse } from "@/app/dtos/response/general-response";
 import { AddContractFromValidation } from "@/app/util/form-validation/add-contract-validation";
 import { AddContractRequest } from "@/app/dtos/request/add-contract-request";
+import { ServiceStatus } from "@/app/models/service-status";
 
 
 
 
 export function useAddContract() {
     const [loading, setLoading] = useState<boolean>(false);
-    const [token, setToken] = useState<Token|null>(null);
-    const [serviceError, setServiceError] = useState<string | null>(null);
+    const [token, setToken] = useState<Token | null>(null);
+    const [serviceStatus, setServiceStatus] = useState<ServiceStatus | null>(null);
     const router = useRouter()
     const { register, handleSubmit, formState: { errors } } = useForm({
         resolver: yupResolver(AddContractFromValidation),
     });
-     
-    useEffect(function () {
-         getCookie<Token>(LoginCookiName).then(p => { 
-            setToken(p)
-         });
-     }, [])
-    const AddContract = async (formdata: AddContractRequest) => {
 
+    useEffect(function () {
+        getCookie<Token>(LoginCookiName).then(p => {
+            setToken(p)
+        });
+    }, [])
+
+    const AddContract = async (formdata: AddContractRequest) => {
+        setServiceStatus(null)
         setLoading(true);
         const headers = new Headers({
             "Content-Type": "application/json",
@@ -38,7 +40,7 @@ export function useAddContract() {
 
 
         try {
-            const response = await fetch("http://localhost:5251/Contract/AddContract", {
+            const response = await fetch("http://localhost:5251/api/v1/Contract/AddContract", {
                 method: "POST",
                 headers: headers,
                 body: JSON.stringify({
@@ -52,19 +54,60 @@ export function useAddContract() {
             if (response.ok) {
 
                 const res: GeneralResponse = await response.json() as GeneralResponse
-                alert(res.responseMessage)
-                router.push("/dashboard/contract")
+                // if (res.responseCode === 100)
+                setServiceStatus({ message: res.responseMessage, isSuccess: true })
+                //else
+                //  setServiceStatus({ message: res.responseMessage, isSuccess: false })
+
 
             } else {
-                setServiceError(response.statusText)
+                setServiceStatus({ message: response.statusText, isSuccess: false })
             }
             setLoading(false)
         } catch (error) {
             setLoading(false)
-            setServiceError(error instanceof Error ? error.message : "An unknown error occurred")
+            setServiceStatus({ message: error instanceof Error ? error.message : "An unknown error occurred", isSuccess: false })
         }
     };
-    return { register, handleSubmit, formState: { errors }, AddContract, loading, serviceError };
+    return { register, handleSubmit, formState: { errors }, AddContract, loading, serviceStatus };
 }
 
+
+
+// const AddContract = async (formdata: AddContractRequest) => {
+
+//     setLoading(true);
+//     const headers = new Headers({
+//         "Content-Type": "application/json",
+//         "Authorization": `${token?.tokenType} ${token?.accessToken}`
+//     });
+
+
+//     try {
+//         const response = await fetch("http://localhost:5251/Contract/AddContract", {
+//             method: "POST",
+//             headers: headers,
+//             body: JSON.stringify({
+//                 "title": formdata.title,
+//                 "Description": formdata.description,
+//                 "startDate": formdata.startDate,
+//                 "endDate": formdata.endDate
+//             }),
+//         })
+//         // Handle the response if needed
+//         if (response.ok) {
+
+//             const res: GeneralResponse = await response.json() as GeneralResponse
+//             alert(res.responseMessage)
+//             router.push("/dashboard/contract")
+
+//         } else {
+//             setServiceError(response.statusText)
+//         }
+//         setLoading(false)
+//     } catch (error) {
+//         setLoading(false)
+//         setServiceError(error instanceof Error ? error.message : "An unknown error occurred")
+//     }
+// };
 

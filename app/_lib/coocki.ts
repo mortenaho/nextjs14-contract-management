@@ -1,5 +1,7 @@
 "use server"
  import { cookies } from 'next/headers';
+import { LoginCookiName } from './general-var';
+import { Token } from '../dtos/response/token';
  
 
 // Set a cookie

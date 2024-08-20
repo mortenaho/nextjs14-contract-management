@@ -10,7 +10,7 @@ import { List } from "postcss/lib/list"
 import { useEffect, useState } from "react"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen, faTimes, faTrash } from '@fortawesome/free-solid-svg-icons';
-import { EditButton, DeleteButton } from "@/component/custom-button"
+import { EditButton, DeleteButton } from "@/app/component/custom-button"
 export default function Contracts() {
 
     const [token, setToken] = useState<Token | null>(null)

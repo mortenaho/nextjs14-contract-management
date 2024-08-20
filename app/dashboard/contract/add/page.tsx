@@ -1,16 +1,16 @@
 "use client"
 
+import { Alert } from '@/app/component/alert';
 import { useAddContract } from './action';
 
 export default function AddContract() {
-    const { register, handleSubmit, formState: { errors }, AddContract, loading, serviceError } = useAddContract()
+    const { register, handleSubmit, formState: { errors }, AddContract, loading, serviceStatus } = useAddContract()
 
     async function onSubmit(data) {
-       await AddContract(data);
+        await AddContract(data);
     };
 
     return <div className="w-full   m-auto">
-        <div className={`text-white  border-red-800 bg-red-500 p-4 rounded mb-2 ${serviceError == null ? 'hidden' : ''}`}>{serviceError}</div>
         <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4   align-middle " onSubmit={handleSubmit(onSubmit)}>
             <div className="mb-4">
                 <label className="block text-gray-700 text-sm font-bold mb-2"  >
@@ -51,5 +51,8 @@ export default function AddContract() {
 
             </div>
         </form>
+
+       {serviceStatus && <Alert  type={serviceStatus.isSuccess ?"success":"error"}>{serviceStatus?.message}</Alert>}
+
     </div>
 }
