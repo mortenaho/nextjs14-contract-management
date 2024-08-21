@@ -1,6 +1,7 @@
 "use client"
 
-import { Alert } from '@/app/component/alert';
+import Alert  from '@/app/component/alert';
+
 import { useAddContract } from './action';
 
 export default function AddContract() {
@@ -52,7 +53,7 @@ export default function AddContract() {
             </div>
         </form>
 
-       {serviceStatus && <Alert  type={serviceStatus.isSuccess ?"success":"error"}>{serviceStatus?.message}</Alert>}
+       {serviceStatus && <Alert message={serviceStatus?.message}  alertType={serviceStatus.isSuccess ?"success":"error"}/>}
 
     </div>
 }

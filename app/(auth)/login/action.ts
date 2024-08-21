@@ -8,6 +8,7 @@ import { Token } from "@/app/dtos/response/token";
 import { setCookie } from "@/app/_lib/coocki";
 import { LoginCookiName } from "@/app/_lib/general-var";
 import { useRouter } from "next/navigation";
+import { ServiceStatus } from "@/app/models/service-status";
 
 
 type LoginModel = {
@@ -16,14 +17,14 @@ type LoginModel = {
 }
 export function useSignin() {
     const [loading, setLoading] = useState<boolean>(false);
-    const [serviceError, setServiceError] = useState<string|null>(null);
+    const [serviceStatus, setServiceStatus] = useState<ServiceStatus|null>(null);
     const router = useRouter()
     const { register, handleSubmit, formState: { errors } } = useForm({
         resolver: yupResolver(loginValidationSchema),
     });
 
     const postData = async (formdata) => {
-
+setServiceStatus(null)
         setLoading(true);
         formdata["twoFactorCode"] = "";
         formdata["twoFactorRecoveryCode"] = "";
@@ -39,7 +40,7 @@ export function useSignin() {
             setLoading(false)
             if (response.ok) {
                 const myToken: Token = bodyResponse as Token;
-
+                setServiceStatus({ message: response.statusText, isSuccess: true })
                 setCookie(LoginCookiName, JSON.stringify(bodyResponse), {
                     httpOnly: true,
                     maxAge: myToken.expiresIn
@@ -48,15 +49,17 @@ export function useSignin() {
                 })
 
             } else {
-                setServiceError(response.statusText)
+                setServiceStatus({ message: response.statusText, isSuccess: false })
+
             }
             setLoading(false)
         } catch (error) {
             setLoading(false)
-            setServiceError(error instanceof Error ? error.message : "An unknown error occurred")
+            setServiceStatus({ message: error instanceof Error ? error.message : "An unknown error occurred", isSuccess: false })
+
         }
     };
-    return { register, handleSubmit, formState: { errors }, postData, loading ,serviceError};
+    return { register, handleSubmit, formState: { errors }, postData, loading ,serviceStatus};
 }
 
 

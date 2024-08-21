@@ -54,10 +54,10 @@ export function useAddContract() {
             if (response.ok) {
 
                 const res: GeneralResponse = await response.json() as GeneralResponse
-                // if (res.responseCode === 100)
+                 if (res.responseCode === 100)
                 setServiceStatus({ message: res.responseMessage, isSuccess: true })
-                //else
-                //  setServiceStatus({ message: res.responseMessage, isSuccess: false })
+                else
+                 setServiceStatus({ message: res.responseMessage, isSuccess: false })
 
 
             } else {

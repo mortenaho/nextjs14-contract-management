@@ -1,15 +1,16 @@
 "use client"
-import {  useSignin } from './action';
+import  Alert  from '@/app/component/alert';
+import { useSignin } from './action';
 
 
 export default function Login() {
-    const { register, handleSubmit, formState: { errors }, postData, loading,serviceError } = useSignin()
+    const { register, handleSubmit, formState: { errors }, postData, loading, serviceStatus } = useSignin()
     async function onSubmit(data) {
         postData(data);
     };
 
     return <div className="w-full max-w-xs m-auto ">
-        <div className={`text-white  border-red-800 bg-red-500 p-4 rounded mb-2 ${serviceError == null ? 'hidden' : ''}`}>{serviceError}</div>
+        {serviceStatus && <Alert position='bottom' message={serviceStatus?.message}  alertType={serviceStatus.isSuccess ? "success":"error"}/>}
         <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4   align-middle " onSubmit={handleSubmit(onSubmit)}>
             <div className="mb-4">
                 <label className="block text-gray-700 text-sm font-bold mb-2"  >
