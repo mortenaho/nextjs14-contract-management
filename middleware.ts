@@ -9,19 +9,19 @@ export  function middleware(req: NextRequest) {
         return NextResponse.redirect(new URL('/login', req.url));
     }
    
-    if (req.nextUrl.pathname.startsWith('/api')) {
-        const token =JSON.parse(req.cookies.get(LoginCookiName)?.value) ;
-        const requestHeaders = new Headers(req.headers)
+    // if (req.nextUrl.pathname.startsWith('/api')) {
+    //     const token =JSON.parse(req.cookies.get(LoginCookiName)?.value) ;
+    //     const requestHeaders = new Headers(req.headers)
          
          
-        requestHeaders.set("Authorization", `${token?.tokenType} ${token?.accessToken}`)
-       return NextResponse.next({
-            request: {
-              // New request headers
-              headers: requestHeaders,
-            },
-          })
-      }
+    //     requestHeaders.set("Authorization", `${token?.tokenType} ${token?.accessToken}`)
+    //    return NextResponse.next({
+    //         request: {
+    //           // New request headers
+    //           headers: requestHeaders,
+    //         },
+    //       })
+    //   }
     
     // ادامه پردازش درخواست
     return NextResponse.next();

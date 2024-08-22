@@ -53,7 +53,7 @@ export default function AddContract() {
             </div>
         </form>
 
-       {serviceStatus && <Alert message={serviceStatus?.message}  alertType={serviceStatus.isSuccess ?"success":"error"}/>}
+       {serviceStatus && <Alert position='top' message={serviceStatus?.message}  alertType={serviceStatus.isSuccess ?"success":"error"}/>}
 
     </div>
 }

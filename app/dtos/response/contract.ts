@@ -3,5 +3,6 @@ export type ContractModel={
     contractId:number,
     startDate:string,
     endDate:string,
-    description:string
+    description:string,
+    contractNumber:string,
 }

@@ -30,7 +30,6 @@ export default function DashboardLayout({ children }) {
                     <li><Link href="/dashboard" className="block py-2 px-4 hover:bg-gray-700">Home</Link></li>
                     <li><Link href="/dashboard/contract" className="block py-2 px-4 hover:bg-gray-700"> Contract</Link></li>
                     <li><Link href="/dashboard/contract/add" className="block py-2 px-4 hover:bg-gray-700">Add Contract</Link></li>
-                    <li><a href="#" className="block py-2 px-4 hover:bg-gray-700">report</a></li>
                     <li><a href="/logout" className="block py-2 px-4 hover:bg-gray-700">logout</a></li>
                 </ul>
             </div>

@@ -11,11 +11,13 @@ import { useEffect, useState } from "react"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen, faTimes, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { EditButton, DeleteButton } from "@/app/component/custom-button"
+import { useRouter } from "next/navigation"
 export default function Contracts() {
 
     const [token, setToken] = useState<Token | null>(null)
     const [contracts, setContracts] = useState<Array<ContractModel> | null>(null)
     const [loading, setLoading] = useState<boolean>(true);
+    const router=useRouter()
 
     useEffect(() => {
         const fetchTokenAndContracts = async () => {
@@ -41,7 +43,7 @@ export default function Contracts() {
         });
 
         try {
-            const response = await fetch("http://localhost:5251/Contract/Get", {
+            const response = await fetch("http://localhost:5251/api/v1/Contract/Get", {
                 method: "GET",
                 headers: headers,
             })
@@ -69,6 +71,9 @@ export default function Contracts() {
     function onDelete(id) {
         alert(id)
     }
+     function onEdit(id) {
+        router.push("/dashboard/contract/edit/"+id)
+    }
     return <div>
 
         <table className="min-w-full border-collapse block md:table">
@@ -87,8 +92,8 @@ export default function Contracts() {
                         <td className="p-2 text-gray-700 block md:table-cell">{p.startDate}</td>
                         <td className="p-2 text-gray-700 block md:table-cell">{p.endDate}</td>
                         <td className="p-2 text-gray-700 block md:table-cell">
-                            <DeleteButton onTouch={() => { onDelete("delete :"+p.contractId) }} />
-                            <EditButton onTouch={() => { onDelete("edit :"+p.contractId) }} />
+                            <DeleteButton key={'DeleteButton'+p.contractId} onTouch={() => { onDelete("delete :"+p.contractId) }} />
+                            <EditButton key={'EditButton'+p.contractId} onTouch={() => { onEdit(p.contractId) }} />
                         </td>
                     </tr>
                 })}
