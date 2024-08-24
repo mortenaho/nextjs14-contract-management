@@ -40,14 +40,15 @@ export function useAddContract() {
 
 
         try {
-            const response = await fetch("http://localhost:5251/api/v1/Contract/AddContract", {
+            const response = await fetch("http://localhost:5251/api/v1/Contract/Add", {
                 method: "POST",
                 headers: headers,
                 body: JSON.stringify({
                     "title": formdata.title,
                     "Description": formdata.description,
                     "startDate": formdata.startDate,
-                    "endDate": formdata.endDate
+                    "endDate": formdata.endDate,
+                    "contractNumber": formdata.contractNumber
                 }),
             })
             // Handle the response if needed

@@ -27,10 +27,10 @@ export default function DashboardLayout({ children }) {
             <div className="w-64 bg-gray-800 text-white">
                 <div className="p-4 text-2xl font-semibold">My Sidebar</div>
                 <ul className="mt-6">
-                    <li><Link href="/dashboard" className="block py-2 px-4 hover:bg-gray-700">Home</Link></li>
-                    <li><Link href="/dashboard/contract" className="block py-2 px-4 hover:bg-gray-700"> Contract</Link></li>
-                    <li><Link href="/dashboard/contract/add" className="block py-2 px-4 hover:bg-gray-700">Add Contract</Link></li>
-                    <li><a href="/logout" className="block py-2 px-4 hover:bg-gray-700">logout</a></li>
+                    <li><Link prefetch={false} href="/dashboard" className="block py-2 px-4 hover:bg-gray-700">Home</Link></li>
+                    <li><Link prefetch={false} href="/dashboard/contract" className="block py-2 px-4 hover:bg-gray-700"> Contract</Link></li>
+                    <li><Link prefetch={false} href="/dashboard/contract/add" className="block py-2 px-4 hover:bg-gray-700">Add Contract</Link></li>
+                    <li><Link prefetch={false} href="/logout" className="block py-2 px-4 hover:bg-gray-700">logout</Link></li>
                 </ul>
             </div>
 

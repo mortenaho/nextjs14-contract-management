@@ -20,7 +20,7 @@ export function useContractService() {
     const [loading, setLoading] = useState<boolean>(false);
     const [token, setToken] = useState<Token | null>(null);
     const [serviceStatus, setServiceStatus] = useState<ServiceStatus | null>(null);
-    const [contract, setContract] = useState<ContractModel | null>(null);
+    const [contract, setContract] = useState<ContractModel>();
     const router = useRouter()
     const { register, handleSubmit, formState: { errors } } = useForm({
         resolver: yupResolver(AddContractFromValidation),
@@ -29,50 +29,55 @@ export function useContractService() {
     useEffect(function () {
         getCookie<Token>(LoginCookiName).then(p => {
             setToken(p)
-            console.log(token)
         });
-    }, [])
+    }, [contract])
 
-    const GetContractById = async (id:number) => {
-        setServiceStatus(null)
+    async function GetContractById(id: number) {
+        setServiceStatus(null);
         setLoading(true);
-       
-        const headers = new Headers({
-            "Content-Type": "application/json",
-            "Authorization": `${token?.tokenType} ${token?.accessToken}`
-        });
-
-
+        var result:GeneralResponseGeneric<ContractModel|null>;
         try {
-            const response = await fetch("http://localhost:5251/api/v1/Contract/Get/"+id, {
-                method: "Get",
-                headers: headers
-            })
-            // Handle the response if needed
+            const response = await fetch("/api/get-contract/" + id, { method: "Get" });
             if (response.ok) {
-
-                const res: GeneralResponseGeneric<ContractModel> = await response.json() as GeneralResponseGeneric<ContractModel>
-                 if (res.responseCode === 100){
-                    setServiceStatus({ message: res.responseMessage, isSuccess: true })
-                    setContract(res.responseBody)
-                 }
+                const res: GeneralResponseGeneric<ContractModel|null> = await response.json() as GeneralResponseGeneric<ContractModel|null>;
+                if (res.responseCode === 100) {
+                    setServiceStatus({ message: res.responseMessage, isSuccess: true });
+                    result=res;
+                }
+                else{
+                    setServiceStatus({ message: res.responseMessage, isSuccess: false });
+                    result=  {
+                        responseBody:null,
+                        responseCode:500,
+                        responseMessage:res.responseMessage
+                    }
+                }
                
-                else
-                 setServiceStatus({ message: res.responseMessage, isSuccess: false })
-
-
             } else {
-                setServiceStatus({ message: response.statusText, isSuccess: false })
+                setServiceStatus({ message: response.statusText, isSuccess: false });
+                result=  {
+                    responseBody:null,
+                    responseCode:500,
+                    responseMessage:response.statusText
+                }
             }
-            setLoading(false)
+            setLoading(false);
+            
         } catch (error) {
-            setLoading(false)
-            setServiceStatus({ message: error instanceof Error ? error.message : "An unknown error occurred", isSuccess: false })
+            setLoading(false);
+            var message=error instanceof Error ? error.message : "An unknown error occurred";
+            setServiceStatus({ message:message, isSuccess: false });
+            result=  {
+                responseBody:null,
+                responseCode:500,
+                responseMessage:message
+            }
         }
-    };
+        return result;
+    }
 
 
-    const UpdateContract = async (formdata: AddContractRequest) => {
+    const Update = async (formdata: AddContractRequest) => {
         setServiceStatus(null)
         setLoading(true);
         const headers = new Headers({
@@ -82,8 +87,8 @@ export function useContractService() {
 
 
         try {
-            const response = await fetch("http://localhost:5251/api/v1/Contract/AddContract", {
-                method: "PuOST",
+            const response = await fetch("http://localhost:5251/api/v1/Contract/Update", {
+                method: "put",
                 headers: headers,
                 body: JSON.stringify({
                     "title": formdata.title,
@@ -97,11 +102,10 @@ export function useContractService() {
             if (response.ok) {
 
                 const res: GeneralResponse = await response.json() as GeneralResponse
-                 if (res.responseCode === 100){
-                                    setServiceStatus({ message: res.responseMessage, isSuccess: true })
-                 }
+                if (res.responseCode === 100)
+                    setServiceStatus({ message: res.responseMessage, isSuccess: true })
                 else
-                 setServiceStatus({ message: res.responseMessage, isSuccess: false })
+                    setServiceStatus({ message: res.responseMessage, isSuccess: false })
 
 
             } else {
@@ -114,7 +118,7 @@ export function useContractService() {
         }
     };
 
-    const AddContract = async (formdata: AddContractRequest) => {
+    const Add = async (formdata: AddContractRequest) => {
         setServiceStatus(null)
         setLoading(true);
         const headers = new Headers({
@@ -124,7 +128,7 @@ export function useContractService() {
 
 
         try {
-            const response = await fetch("http://localhost:5251/api/v1/Contract/AddContract", {
+            const response = await fetch("http://localhost:5251/api/v1/Contract/Add", {
                 method: "POST",
                 headers: headers,
                 body: JSON.stringify({
@@ -139,10 +143,10 @@ export function useContractService() {
             if (response.ok) {
 
                 const res: GeneralResponse = await response.json() as GeneralResponse
-                 if (res.responseCode === 100)
-                setServiceStatus({ message: res.responseMessage, isSuccess: true })
+                if (res.responseCode === 100)
+                    setServiceStatus({ message: res.responseMessage, isSuccess: true })
                 else
-                 setServiceStatus({ message: res.responseMessage, isSuccess: false })
+                    setServiceStatus({ message: res.responseMessage, isSuccess: false })
 
 
             } else {
@@ -155,7 +159,5 @@ export function useContractService() {
         }
     };
 
-    return { register, handleSubmit, formState: { errors }, GetContractById, loading, serviceStatus,contract };
+    return { register, handleSubmit, formState: { errors }, GetContractById, Add, Update, loading, serviceStatus, contract };
 }
-
- 
