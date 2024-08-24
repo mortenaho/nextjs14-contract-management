@@ -24,20 +24,18 @@ export default function Contracts() {
     const router = useRouter()
 
     useEffect(() => {
-        const fetchTokenAndContracts = async () => {
-            setLoading(true);
-            const token = await getCookie<Token>(LoginCookiName);
-            setToken(token);
-
-            if (token) {
-                getContract(token);
-            }
-            setLoading(false);
-        };
-
         fetchTokenAndContracts();
     }, []);
+    const fetchTokenAndContracts = async () => {
+        setLoading(true);
+        const token = await getCookie<Token>(LoginCookiName);
+        setToken(token);
 
+        if (token) {
+            getContract(token);
+        }
+        setLoading(false);
+    }
 
     const getContract = async (token: Token) => {
         setLoading(true);
@@ -77,19 +75,22 @@ export default function Contracts() {
         setContractId(id)
     }
     async function ConfirmDelete() {
-      var res= await fetch("/api/contract/delete/"+contractId,{method:"get"})
-      var body=await res.json()
-      if(body.responseCode==100){
-        setIsDelete(false)
-        setContractId(0)
-      }else{
-        
-      }
+        var res = await fetch("/api/contract/delete/" + contractId, { method: "get" })
+        var body = await res.json()
+        if (body.responseCode == 100) {
+            setIsDelete(false)
+            setContracts(contracts?.filter(p => {
+                return p.contractId != contractId
+            }))
+            setContractId(0)
+        } else {
+
+        }
     }
     function onEdit(id) {
         router.push("/dashboard/contract/edit/" + id)
     }
-    function deleteCancel(){
+    function deleteCancel() {
         setIsDelete(false)
     }
     return <div>
@@ -119,7 +120,7 @@ export default function Contracts() {
 
             </tbody>
         </table>
-        { <ConfirmBox title={"delete"} isOpen={isDelete} key={"deleteitem"} message={"delete message"} onCancel={()=>{deleteCancel()}} onConfirm={() => { ConfirmDelete() }} />}
+        {<ConfirmBox title={"delete"} isOpen={isDelete} key={"deleteitem"} message={"delete message"} onCancel={() => { deleteCancel() }} onConfirm={() => { ConfirmDelete() }} />}
 
     </div>
 
