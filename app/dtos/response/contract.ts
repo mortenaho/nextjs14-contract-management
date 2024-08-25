@@ -5,4 +5,6 @@ export type ContractModel={
     endDate:string,
     description:string,
     contractNumber:string,
+    shamsiStartDate:string,
+    shamsiEndDate:string,
 }

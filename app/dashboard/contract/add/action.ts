@@ -20,7 +20,7 @@ export function useAddContract() {
     const [token, setToken] = useState<Token | null>(null);
     const [serviceStatus, setServiceStatus] = useState<ServiceStatus | null>(null);
     const router = useRouter()
-    const { register, handleSubmit, formState: { errors } } = useForm({
+    const { register, handleSubmit, formState: { errors } ,reset,setValue} = useForm({
         resolver: yupResolver(AddContractFromValidation),
     });
 
@@ -70,7 +70,7 @@ export function useAddContract() {
             setServiceStatus({ message: error instanceof Error ? error.message : "An unknown error occurred", isSuccess: false })
         }
     };
-    return { register, handleSubmit, formState: { errors }, AddContract, loading, serviceStatus };
+    return { register, handleSubmit, formState: { errors }, AddContract, loading, serviceStatus ,reset,setValue};
 }
 
 

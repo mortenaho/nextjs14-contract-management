@@ -4,5 +4,6 @@ export const AddContractFromValidation = yup.object().shape({
     startDate: yup.string().required('start date is required'),
     endDate: yup.string().required('end date is required'),
     description: yup.string().nullable(),
-    contractNumber: yup.string().required("pleas enter the contract number")
+    contractNumber: yup.string().required("pleas enter the contract number"),
+    contractId: yup.number().nullable()
 });

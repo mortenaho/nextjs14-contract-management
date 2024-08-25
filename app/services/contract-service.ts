@@ -22,7 +22,7 @@ export function useContractService() {
     const [serviceStatus, setServiceStatus] = useState<ServiceStatus | null>(null);
     const [contract, setContract] = useState<ContractModel>();
     const router = useRouter()
-    const { register, handleSubmit, formState: { errors } } = useForm({
+    const { register, handleSubmit, formState: { errors } , setValue, reset,getValues} = useForm({
         resolver: yupResolver(AddContractFromValidation),
     });
 
@@ -159,5 +159,5 @@ export function useContractService() {
         }
     };
 
-    return { register, handleSubmit, formState: { errors }, GetContractById, Add, Update, loading, serviceStatus, contract };
+    return { register, handleSubmit, formState: { errors }, GetContractById, Add, Update, loading, serviceStatus, contract ,setValue,reset,getValues};
 }

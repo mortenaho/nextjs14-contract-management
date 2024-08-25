@@ -18,9 +18,6 @@ export default function DashboardLayout({ children }) {
         }, [router]);
 
     })
-
-
-
     return <div className="bg-sky-700 h-lvh">
         <div className="flex h-screen">
 

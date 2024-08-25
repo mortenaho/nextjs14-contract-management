@@ -4,13 +4,19 @@ import Alert from '@/app/component/alert';
 
 import { useAddContract } from './action';
 import { useState } from 'react';
- import PersianDatePickerDropdown from '@/app/component/persian-datepicker';
+import { DatePicker } from 'zaman';
+import { formatDate } from '@/app/_lib/converter';
+ 
 
 export default function AddContract() {
-    const { register, handleSubmit, formState: { errors }, AddContract, loading, serviceStatus } = useAddContract()
-     async function onSubmit(data) {
-       AddContract(data);
+    const { register, handleSubmit, formState: { errors }, AddContract, loading, serviceStatus,reset,setValue } = useAddContract()
+    async function onSubmit(data) {
+        AddContract(data);
     };
+    function onChange(e,name) {
+      var date= formatDate(e.value)
+      setValue(name,date)
+    }
 
     return <div className="w-full   m-auto">
         <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4   align-middle " onSubmit={handleSubmit(onSubmit)}>
@@ -33,15 +39,16 @@ export default function AddContract() {
                     <label className="block text-gray-700 text-sm font-bold mb-2"  >
                         start date
                     </label>
-                    <PersianDatePickerDropdown key={"kkiii"}/>
-                    <input   {...register('startDate')} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="start-date" type="date" placeholder="" />
+                    <DatePicker  onChange={(e)=>onChange(e,"startDate")}    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+                    <input type='hidden'   {...register('startDate')} />
                     {errors.startDate && <p className="text-red-500">{errors.startDate?.message}</p>}
                 </div>
                 <div className="mb-6 w-1/2">
                     <label className="block text-gray-700 text-sm font-bold mb-2"  >
                         end date
                     </label>
-                    <input {...register('endDate')} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="end-date" type="date" placeholder="" />
+                    <DatePicker    onChange={(e)=>onChange(e,"endDate")}  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+                    <input type='hidden'   {...register('endDate')} />
                     {errors.endDate && <p className="text-red-500">{errors.endDate?.message}</p>}
                 </div>
             </div>
