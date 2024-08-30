@@ -1,33 +1,29 @@
 "use client"
 import { useEffect, useState } from 'react';
-
-import { ContractModel } from '@/app/dtos/response/contract';
+ 
 import { Loading } from '@/app/component/loading';
 import { useContractService } from '@/app/services/contract-service';
 import Alert from '@/app/component/alert';
 import { formatDate } from '@/app/_lib/converter';
-import { DatePicker } from 'zaman';
-import { useQuery } from '@tanstack/react-query';
+import JalaliDatepicker from '@/app/component/JalaliDatepicker';
+ 
 export type Prop = {
     id: number
 }
 
-
-
-function fetchUserData({ params }: Prop) {
-    console.log(params.id)
-  return fetch("/api/contract/get/" + params.id, { method: "get" }).then(p=>p.json())
-}
 export default function EditContract({ params }: Prop) {
      const { register, handleSubmit, formState: { errors }, GetContractById, Update, loading, serviceStatus,setValue,reset,getValues } = useContractService()
     const [isLoading,setIsLoading ]= useState(true)
+    const[startDate,setStartDate]=useState("2024-05-10")
     useEffect(() => {
+       
         const fetchd = async () => {
             var mm =await fetch("/api/contract/get/" + params.id, { method: "get" }).finally(()=>{
                 setIsLoading(false)
+               
             })
              var ee = await mm.json();
-            
+           
             reset(ee.responseBody)
             
         }
@@ -67,7 +63,10 @@ export default function EditContract({ params }: Prop) {
                     <label className="block text-gray-700 text-sm font-bold mb-2"  >
                         start date  
                     </label>
-                    <DatePicker  defaultValue={getValues("startDate")} onChange={(e)=>onChange(e,"startDate")}    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+                    {/* <DatePicker  defaultValue={"2024/02/01"} onChange={(e)=>onChange(e,"startDate")}    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" /> */}
+                   
+                      <JalaliDatepicker defaultValue={getValues("startDate")} />
+
                     <input type='hidden'   {...register('startDate')} />
                     {errors.startDate && <p className="text-red-500">{errors.startDate?.message}</p>}
                 </div>
@@ -75,7 +74,7 @@ export default function EditContract({ params }: Prop) {
                     <label className="block text-gray-700 text-sm font-bold mb-2"  >
                         end date
                     </label>
-                    <DatePicker defaultValue={getValues("endDate")} onChange={(e)=>onChange(e,"endDate")}  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+                    {/* <DatePicker defaultValue={getValues("endDate")} onChange={(e)=>onChange(e,"endDate")}  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" /> */}
                     <input type='hidden'   {...register('endDate')} />
                     {errors.endDate && <p className="text-red-500">{errors.endDate?.message}</p>}
                 </div>

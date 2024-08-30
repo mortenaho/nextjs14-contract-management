@@ -5,11 +5,7 @@ import { LoginCookiName } from "@/app/_lib/general-var"
 import { ContractModel } from "@/app/dtos/response/contract"
 import { GeneralResponseGeneric } from "@/app/dtos/response/general-response"
 import { Token } from "@/app/dtos/response/token"
-import { execSync } from "child_process"
-import { List } from "postcss/lib/list"
 import { useEffect, useState } from "react"
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPen, faTimes, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { EditButton, DeleteButton } from "@/app/component/custom-button"
 import { useRouter } from "next/navigation"
 import { ConfirmBox } from "@/app/component/confirm-box"

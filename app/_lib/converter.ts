@@ -1,3 +1,6 @@
+
+import jalaali from 'jalaali-js';
+
 export const formDataToJson = (formData) => {
     const obj = {};
     formData.forEach((value, key) => {
@@ -21,3 +24,17 @@ export const formDataToJson = (formData) => {
 
     return [year, month, day].join(seprator);
 }
+
+
+
+export  const convertToJalali = (gregorianDate) => {
+    const [year, month, day] = gregorianDate.split('/').map(Number);
+    const jalaliDate = jalaali.toJalaali(year, month, day);
+    return `${jalaliDate.jy}/${jalaliDate.jm}/${jalaliDate.jd}`;
+};
+
+export const convertToGregorian = (jalaliDate) => {
+    const [year, month, day] = jalaliDate.split('/').map(Number);
+    const gregorianDate = jalaali.toGregorian(year, month, day);
+    return `${gregorianDate.gy}/${gregorianDate.gm}/${gregorianDate.gd}`;
+};
