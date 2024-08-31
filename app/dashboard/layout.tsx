@@ -22,7 +22,7 @@ export default function DashboardLayout({ children }) {
         <div className="flex h-screen">
 
             <div className="w-64 bg-gray-800 text-white">
-                <div className="p-4 text-2xl font-semibold">My Sidebar</div>
+                <div className="p-4 text-2xl font-semibold">پنل مدیریت</div>
                 <ul className="mt-6">
                     <li><Link prefetch={false} href="/dashboard" className="block py-2 px-4 hover:bg-gray-700">Home</Link></li>
                     <li><Link prefetch={false} href="/dashboard/contract" className="block py-2 px-4 hover:bg-gray-700"> Contract</Link></li>
@@ -33,7 +33,7 @@ export default function DashboardLayout({ children }) {
 
             <div className="flex-1">
                 <div className="flex bg-gray-700 h-16">
-                    <p className="absolute right-2 top-3 h-9 w-9 rounded-full bg-blue-500 text-white text-center content-center" >M</p>
+                    <p className="absolute left-2 top-3 h-9 w-9 rounded-full bg-blue-500 text-white text-center content-center" >M</p>
                 </div>
                 <div className="p-4">
                     {children}

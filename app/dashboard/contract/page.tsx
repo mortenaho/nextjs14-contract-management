@@ -94,18 +94,18 @@ export default function Contracts() {
         <table className="min-w-full border-collapse block md:table">
             <thead className="block md:table-header-group">
                 <tr className="border border-gray-200 block md:table-row">
-                    <th className="bg-gray-100 p-2 text-gray-700 text-left block md:table-cell">title</th>
-                    <th className="bg-gray-100 p-2 text-gray-700 text-left block md:table-cell">start date</th>
-                    <th className="bg-gray-100 p-2 text-gray-700 text-left block md:table-cell">end date</th>
-                    <th className="bg-gray-100 p-2 text-gray-700 text-left block md:table-cell"> </th>
+                    <th className="bg-gray-100 p-2 text-gray-700 text-right block md:table-cell">عنوان قرار داد</th>
+                    <th className="bg-gray-100 p-2 text-gray-700 text-right block md:table-cell">تاریخ شروع</th>
+                    <th className="bg-gray-100 p-2 text-gray-700 text-right block md:table-cell">   تاریخ پایان</th>
+                    <th className="bg-gray-100 p-2 text-gray-700 text-right block md:table-cell"> </th>
                 </tr>
             </thead>
             <tbody className="block md:table-row-group">
                 {contracts && contracts.map(p => {
                     return <tr key={"tr_" + p.contractId} className="bg-white border border-gray-200 block md:table-row">
                         <td className="p-2 text-gray-700 block md:table-cell">{p.title}</td>
-                        <td className="p-2 text-gray-700 block md:table-cell">{p.startDate}</td>
-                        <td className="p-2 text-gray-700 block md:table-cell">{p.endDate}</td>
+                        <td className="p-2 text-gray-700 block md:table-cell">{p.shamsiStartDate}</td>
+                        <td className="p-2 text-gray-700 block md:table-cell">{p.shamsiEndDate}</td>
                         <td className="p-2 text-gray-700 block md:table-cell">
                             <DeleteButton key={'DeleteButton' + p.contractId} onTouch={() => { onDelete(p.contractId) }} />
                             <EditButton key={'EditButton' + p.contractId} onTouch={() => { onEdit(p.contractId) }} />

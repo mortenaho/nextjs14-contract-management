@@ -34,11 +34,22 @@ export  const convertToJalali = (gregorianDate:string) => {
 };
 
 export const convertToGregorian = (jalaliDate:string) => {
-     
+    
    if(jalaliDate!='' || jalaliDate.length>0){
-    const [year, month, day] = jalaliDate.toString().split('/').map(Number);
+    const [year, month, day] = convertPersianToEnglish(jalaliDate.toString()).split('/').map(Number);
     const gregorianDate = jalaali.toGregorian(year, month, day);
     return `${gregorianDate.gy}/${gregorianDate.gm}/${gregorianDate.gd}`;
    }
    return ""
 };
+
+export const  convertPersianToEnglish=(str:string) =>{
+    const persianNumbers = [/۰/g, /۱/g, /۲/g, /۳/g, /۴/g, /۵/g, /۶/g, /۷/g, /۸/g, /۹/g];
+    const englishNumbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+
+    let convertedStr = str;
+    for (let i = 0; i < 10; i++) {
+        convertedStr = convertedStr.replace(persianNumbers[i], englishNumbers[i]);
+    }
+    return convertedStr;
+}

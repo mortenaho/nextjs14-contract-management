@@ -4,9 +4,11 @@ import Alert from '@/app/component/alert';
 
 import { useAddContract } from './action';
 import { useState } from 'react';
-import { DatePicker } from 'zaman';
-import { formatDate } from '@/app/_lib/converter';
  
+import { convertToGregorian, formatDate } from '@/app/_lib/converter';
+import DatePicker from 'react-multi-date-picker';
+import persian from "react-date-object/calendars/persian"
+import persian_fa from "react-date-object/locales/persian_fa"
 
 export default function AddContract() {
     const { register, handleSubmit, formState: { errors }, AddContract, loading, serviceStatus,reset,setValue } = useAddContract()
@@ -22,14 +24,14 @@ export default function AddContract() {
         <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4   align-middle " onSubmit={handleSubmit(onSubmit)}>
             <div className="mb-4">
                 <label className="block text-gray-700 text-sm font-bold mb-2"  >
-                    Title
+                    عنوان
                 </label>
                 <input   {...register('title')} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="title" type="text" placeholder="title" />
                 {errors.title && <p className="text-red-500">{errors.title?.message}</p>}
             </div>
             <div className="mb-4">
                 <label className="block text-gray-700 text-sm font-bold mb-2"  >
-                    Contract Number
+                    شماره قرار داد
                 </label>
                 <input   {...register('contractNumber')} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="contractNumber" type="text" placeholder="contractNumber" />
                 {errors.contractNumber && <p className="text-red-500">{errors.contractNumber?.message}</p>}
@@ -37,24 +39,38 @@ export default function AddContract() {
             <div className="flex gap-2">
                 <div className="mb-6 w-1/2">
                     <label className="block text-gray-700 text-sm font-bold mb-2"  >
-                        start date
+                       تاریخ شروع
                     </label>
-                    <DatePicker  onChange={(e)=>onChange(e,"startDate")}    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+                    <DatePicker
+                        calendar={persian}
+                        locale={persian_fa}
+                        calendarPosition="bottom-right"
+                        onChange={(date)=>setValue("startDate",convertToGregorian(date))}
+                        className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight'
+                        render={<input  />}
+                    />
                     <input type='hidden'   {...register('startDate')} />
                     {errors.startDate && <p className="text-red-500">{errors.startDate?.message}</p>}
                 </div>
                 <div className="mb-6 w-1/2">
                     <label className="block text-gray-700 text-sm font-bold mb-2"  >
-                        end date
+                        تاریخ پایان
                     </label>
-                    <DatePicker    onChange={(e)=>onChange(e,"endDate")}  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
-                    <input type='hidden'   {...register('endDate')} />
+                    <DatePicker
+                        calendar={persian}
+                        locale={persian_fa}
+                        calendarPosition="bottom-right"
+                        onChange={(date)=>setValue("endDate",convertToGregorian(date))}
+                        className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight'
+                        render={<input  />}
+                    />
+                     <input type='hidden'   {...register('endDate')} />
                     {errors.endDate && <p className="text-red-500">{errors.endDate?.message}</p>}
                 </div>
             </div>
             <div className="mb-6">
                 <label className="block text-gray-700 text-sm font-bold mb-2"  >
-                    description
+                   توضیحات
                 </label>
                 <textarea  {...register('description')} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="description" />
 
