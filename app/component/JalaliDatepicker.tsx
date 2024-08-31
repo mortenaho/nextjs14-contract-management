@@ -75,7 +75,7 @@ const JalaliDatepicker = ({ defaultValue = ""}) => {
                 <Calendar
                     value={selectedDay}
                     locale={"fa"}
-                    shouldHighlightWeekends
+                     
                 />
             </div>
         </div>

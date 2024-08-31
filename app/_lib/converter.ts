@@ -27,14 +27,18 @@ export const formDataToJson = (formData) => {
 
 
 
-export  const convertToJalali = (gregorianDate) => {
+export  const convertToJalali = (gregorianDate:string) => {
     const [year, month, day] = gregorianDate.split('/').map(Number);
     const jalaliDate = jalaali.toJalaali(year, month, day);
     return `${jalaliDate.jy}/${jalaliDate.jm}/${jalaliDate.jd}`;
 };
 
-export const convertToGregorian = (jalaliDate) => {
-    const [year, month, day] = jalaliDate.split('/').map(Number);
+export const convertToGregorian = (jalaliDate:string) => {
+     
+   if(jalaliDate!='' || jalaliDate.length>0){
+    const [year, month, day] = jalaliDate.toString().split('/').map(Number);
     const gregorianDate = jalaali.toGregorian(year, month, day);
     return `${gregorianDate.gy}/${gregorianDate.gm}/${gregorianDate.gd}`;
+   }
+   return ""
 };
