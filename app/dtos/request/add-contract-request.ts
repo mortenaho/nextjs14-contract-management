@@ -3,5 +3,6 @@ export type AddContractRequest={
     startDate:string,
     endDate:string,
     description:string,
-    contractNumber:string
+    contractNumber:string,
+    contractId:number,
 }

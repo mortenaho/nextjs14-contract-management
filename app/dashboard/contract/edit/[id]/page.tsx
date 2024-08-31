@@ -45,7 +45,7 @@ export default function EditContract({ params }: Prop) {
 
     return <div className="w-full   m-auto">
         <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4   align-middle " onSubmit={handleSubmit(onSubmit)}>
-            <input type='hidden' defaultValue={getValues("contractId")} />
+            <input type='hidden' {...register("contractId")} />
             <div className="mb-4">
                 <label className="block text-gray-700 text-sm font-bold mb-2"  >
                     Title
@@ -71,9 +71,9 @@ export default function EditContract({ params }: Prop) {
                         locale={persian_fa}
                         calendarPosition="bottom-right"
                         onChange={(date)=>setValue("startDate",convertToGregorian(date))}
-                        value={getValues("shamsiStartDate")}
+                         value={getValues("shamsiStartDate")}
                         className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight'
-                        render={<input {...register('shamsiStartDate')}/>}
+                        render={<input  />}
                     />
 
                     <input type='hidden'   {...register('startDate')} />
@@ -89,7 +89,7 @@ export default function EditContract({ params }: Prop) {
                         calendarPosition="bottom-right"
                         onChange={(date)=>setValue("endDate",convertToGregorian(date))}
                        value={getValues("shamsiEndDate")}
-                        render={<input {...register('shamsiEndDate')}/>}
+                        render={<input  />}
                         className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight'
                     />
                      <input type='hidden'   {...register('endDate')} />

@@ -96,6 +96,7 @@ export function useContractService() {
                     "startDate": formdata.startDate,
                     "endDate": formdata.endDate,
                     "contractNumber": formdata.contractNumber,
+                    "contractId": formdata.contractId,
                 }),
             })
             // Handle the response if needed
