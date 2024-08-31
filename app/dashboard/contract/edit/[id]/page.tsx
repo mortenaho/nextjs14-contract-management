@@ -73,6 +73,7 @@ export default function EditContract({ params }: Prop) {
                         onChange={(date)=>setValue("startDate",convertToGregorian(date))}
                         value={getValues("shamsiStartDate")}
                         className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight'
+                        render={<input {...register('shamsiStartDate')}/>}
                     />
 
                     <input type='hidden'   {...register('startDate')} />
@@ -87,7 +88,8 @@ export default function EditContract({ params }: Prop) {
                         locale={persian_fa}
                         calendarPosition="bottom-right"
                         onChange={(date)=>setValue("endDate",convertToGregorian(date))}
-                        value={getValues("shamsiEndDate")}
+                       value={getValues("shamsiEndDate")}
+                        render={<input {...register('shamsiEndDate')}/>}
                         className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight'
                     />
                      <input type='hidden'   {...register('endDate')} />
