@@ -1,0 +1,22 @@
+@font-face {
+    font-family: 'iransans';
+    src: url('fonts/IRANSansWeb_FaNum_Light.eot'); /* IE9 Compat Modes */
+    src: url('fonts/IRANSansWeb_FaNum_Light.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('fonts/IRANSansWeb_FaNum_Light.woff2') format('woff2'), /* Super Modern Browsers */
+    url('fonts/IRANSansWeb_FaNum_Light.woff') format('woff'), /* Pretty Modern Browsers */
+    url('fonts/IRANSansWeb_FaNum_Light.ttf')  format('truetype');
+}
+
+
+@font-face {
+    font-family: 'nataliq';
+    src: url('fonts/IranNastaliq.eot'),/* IE9 Compat Modes */
+    url('fonts/IranNastaliq.woff') format('woff'), /* Pretty Modern Browsers */
+    url('fonts/IranNastaliq.ttf')  format('truetype');
+}
+
+
+h1,h2,h3,h4,h5,h6,p,span,text,textarea,input,select,button,a,b,div,li,label,td,th
+{
+    font-family: "Source Sans Pro" !important;
+}

@@ -26,14 +26,14 @@ export default function AddContract() {
                 <label className="block text-gray-700 text-sm font-bold mb-2"  >
                     عنوان
                 </label>
-                <input   {...register('title')} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="title" type="text" placeholder="title" />
+                <input   {...register('title')} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="title" type="text" placeholder="عنوان قرار داد" />
                 {errors.title && <p className="text-red-500">{errors.title?.message}</p>}
             </div>
             <div className="mb-4">
                 <label className="block text-gray-700 text-sm font-bold mb-2"  >
                     شماره قرار داد
                 </label>
-                <input   {...register('contractNumber')} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="contractNumber" type="text" placeholder="contractNumber" />
+                <input   {...register('contractNumber')} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="contractNumber" type="text" placeholder="شماره قرار داد" />
                 {errors.contractNumber && <p className="text-red-500">{errors.contractNumber?.message}</p>}
             </div>
             <div className="flex gap-2">
@@ -47,7 +47,7 @@ export default function AddContract() {
                         calendarPosition="bottom-right"
                         onChange={(date)=>setValue("startDate",convertToGregorian(date))}
                         className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight'
-                        render={<input  />}
+                        render={<input className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight'  />}
                     />
                     <input type='hidden'   {...register('startDate')} />
                     {errors.startDate && <p className="text-red-500">{errors.startDate?.message}</p>}
@@ -61,8 +61,8 @@ export default function AddContract() {
                         locale={persian_fa}
                         calendarPosition="bottom-right"
                         onChange={(date)=>setValue("endDate",convertToGregorian(date))}
-                        className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight'
-                        render={<input  />}
+                        
+                        render={<input className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight'  />}
                     />
                      <input type='hidden'   {...register('endDate')} />
                     {errors.endDate && <p className="text-red-500">{errors.endDate?.message}</p>}
@@ -79,7 +79,7 @@ export default function AddContract() {
 
             <div className="flex items-center justify-between">
                 <button disabled={loading} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline disabled:cursor-not-allowed" type="submit">
-                    Save
+                    ثبت قرارداد
                 </button>
 
             </div>
