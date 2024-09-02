@@ -9,6 +9,8 @@ import JalaliDatepicker from '@/app/component/JalaliDatepicker';
 import DatePicker from 'react-multi-date-picker';
 import persian from "react-date-object/calendars/persian"
 import persian_fa from "react-date-object/locales/persian_fa"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus, faSave } from '@fortawesome/free-solid-svg-icons';
 export type Prop = {
     id: number
 }
@@ -48,14 +50,14 @@ export default function EditContract({ params }: Prop) {
             <input type='hidden' {...register("contractId")} />
             <div className="mb-4">
                 <label className="block text-gray-700 text-sm font-bold mb-2"  >
-                    Title
+                    عنوان قرار داد
                 </label>
                 <input     {...register("title")} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="title" type="text" placeholder="title" />
                 {errors.title && <p className="text-red-500">{errors.title?.message}</p>}
             </div>
             <div className="mb-4">
                 <label className="block text-gray-700 text-sm font-bold mb-2"  >
-                    Contract Number
+                   شماره قرارداد
                 </label>
                 <input     {...register("contractNumber")} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="contractNumber" type="text" placeholder="contractNumber" />
                 {errors.contractNumber && <p className="text-red-500">{errors.contractNumber?.message}</p>}
@@ -63,7 +65,7 @@ export default function EditContract({ params }: Prop) {
             <div className="flex gap-2">
                 <div className="mb-6 w-1/2">
                     <label className="block text-gray-700 text-sm font-bold mb-2"  >
-                        start date
+                        تاریخ شروع
                     </label>
                     {/* <DatePicker  defaultValue={"2024/02/01"} onChange={(e)=>onChange(e,"startDate")}    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" /> */}
                     <DatePicker
@@ -73,7 +75,7 @@ export default function EditContract({ params }: Prop) {
                         onChange={(date)=>setValue("startDate",convertToGregorian(date))}
                          value={getValues("shamsiStartDate")}
                         className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight'
-                        render={<input  />}
+                        render={<input  className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight'  />}
                     />
 
                     <input type='hidden'   {...register('startDate')} />
@@ -81,7 +83,7 @@ export default function EditContract({ params }: Prop) {
                 </div>
                 <div className="mb-6 w-1/2">
                     <label className="block text-gray-700 text-sm font-bold mb-2"  >
-                        end date
+                        تاریخ پایان
                     </label>
                     <DatePicker
                         calendar={persian}
@@ -89,7 +91,7 @@ export default function EditContract({ params }: Prop) {
                         calendarPosition="bottom-right"
                         onChange={(date)=>setValue("endDate",convertToGregorian(date))}
                        value={getValues("shamsiEndDate")}
-                        render={<input  />}
+                        render={<input  className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight' />}
                         className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight'
                     />
                      <input type='hidden'   {...register('endDate')} />
@@ -98,7 +100,7 @@ export default function EditContract({ params }: Prop) {
             </div>
             <div className="mb-6">
                 <label className="block text-gray-700 text-sm font-bold mb-2"  >
-                    description
+                    توضیحات
                 </label>
                 <textarea  {...register('description')} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="description" />
 
@@ -107,7 +109,7 @@ export default function EditContract({ params }: Prop) {
 
             <div className="flex items-center justify-between">
                 <button disabled={loading} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
-                    Save
+                   <FontAwesomeIcon size='lg' icon={faSave}/> ویرایش درخواست
                 </button>
 
             </div>
