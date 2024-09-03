@@ -1,11 +1,12 @@
 import * as yup from 'yup';
 export const AddContractFromValidation = yup.object().shape({
-    title: yup.string().required('title is required'),
-    startDate: yup.string().required('start date is required'),
-    endDate: yup.string().required('end date is required'),
+    title: yup.string().required('عنوان قرارداد را وارد کنید'),
+    startDate: yup.string().required('تاریخ شروع قرارداد الزامی میباشد'),
+    endDate: yup.string().required('تاریخ پایان قرار داد الزامی میباشد'),
     description: yup.string().nullable(),
-    contractNumber: yup.string().required("pleas enter the contract number"),
+    contractNumber: yup.string().required("شماره قرار داد اجباری میباشد"),
     contractId: yup.number().nullable(),
-    shamsiStartDate:yup.string().nullable(),
-    shamsiEndDate:yup.string().nullable(),
+    shamsiStartDate: yup.string().nullable(),
+    shamsiEndDate: yup.string().nullable(),
+    contractingPartyId: yup.string().required("لطفا پیمانکار را انتخاب کنید"),
 });

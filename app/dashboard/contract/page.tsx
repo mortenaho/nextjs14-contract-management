@@ -95,6 +95,7 @@ export default function Contracts() {
             <thead className="block md:table-header-group">
                 <tr className="border border-gray-200 block md:table-row">
                     <th className="bg-gray-100 p-2 text-gray-700 text-right block md:table-cell">عنوان قرار داد</th>
+                    <th className="bg-gray-100 p-2 text-gray-700 text-right block md:table-cell">پیمانکار</th>
                     <th className="bg-gray-100 p-2 text-gray-700 text-right block md:table-cell">تاریخ شروع</th>
                     <th className="bg-gray-100 p-2 text-gray-700 text-right block md:table-cell">   تاریخ پایان</th>
                     <th className="bg-gray-100 p-2 text-gray-700 text-right block md:table-cell"> </th>
@@ -104,6 +105,7 @@ export default function Contracts() {
                 {contracts && contracts.map(p => {
                     return <tr key={"tr_" + p.contractId} className="bg-white border border-gray-200 block md:table-row">
                         <td className="p-2 text-gray-700 block md:table-cell">{p.title}</td>
+                        <td className="p-2 text-gray-700 block md:table-cell">{p.contractingName}</td>
                         <td className="p-2 text-gray-700 block md:table-cell">{p.shamsiStartDate}</td>
                         <td className="p-2 text-gray-700 block md:table-cell">{p.shamsiEndDate}</td>
                         <td className="p-2 text-gray-700 block md:table-cell">

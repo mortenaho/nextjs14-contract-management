@@ -48,7 +48,8 @@ export function useAddContract() {
                     "Description": formdata.description,
                     "startDate": formdata.startDate,
                     "endDate": formdata.endDate,
-                    "contractNumber": formdata.contractNumber
+                    "contractNumber": formdata.contractNumber,
+                    "contractingPartyId": formdata.contractingPartyId
                 }),
             })
             // Handle the response if needed

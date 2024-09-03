@@ -5,4 +5,5 @@ export type AddContractRequest={
     description:string,
     contractNumber:string,
     contractId:number,
+   contractingPartyId:number,
 }

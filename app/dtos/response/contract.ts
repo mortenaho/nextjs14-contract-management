@@ -7,4 +7,5 @@ export type ContractModel={
     contractNumber:string,
     shamsiStartDate:string,
     shamsiEndDate:string,
+    contractingName:string
 }
