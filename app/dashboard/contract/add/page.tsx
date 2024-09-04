@@ -82,7 +82,7 @@ export default function AddContract() {
                         calendarPosition="bottom-right"
                         onChange={(date) => setValue("startDate", convertToGregorian(date))}
                          
-                        render={<input className='shadow appearance-none border rounded w-96 py-2 px-3 text-gray-700 leading-tight' />}
+                        render={<input className='shadow appearance-none border rounded w-11/12 py-2 px-3 text-gray-700 leading-tight' />}
                     />
                     <input type='hidden'   {...register('startDate')} />
                     {errors.startDate && <p className="text-red-500">{errors.startDate?.message}</p>}
@@ -97,7 +97,7 @@ export default function AddContract() {
                         calendarPosition="bottom-right"
                         onChange={(date) => setValue("endDate", convertToGregorian(date))}
 
-                        render={<input className='shadow appearance-none border rounded w-96 py-2 px-3 text-gray-700 leading-tight' />}
+                        render={<input className='shadow appearance-none border rounded  w-11/12 py-2 px-3 text-gray-700 leading-tight' />}
                     />
                     <input type='hidden'   {...register('endDate')} />
                     {errors.endDate && <p className="text-red-500">{errors.endDate?.message}</p>}

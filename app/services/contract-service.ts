@@ -97,6 +97,7 @@ export function useContractService() {
                     "endDate": formdata.endDate,
                     "contractNumber": formdata.contractNumber,
                     "contractId": formdata.contractId,
+                    "ContractingPartyId":formdata.contractingPartyId
                 }),
             })
             // Handle the response if needed

@@ -27,6 +27,7 @@ export default function DashboardLayout({ children }) {
         { title: "داشبورد", link: "/dashboard", icon: faDashboard },
         { title: "قراردادها", link: "/dashboard/contract", icon: faContactBook },
         { title: "ثبت قرارداد", link: "/dashboard/contract/add", icon: faPencilSquare },
+        { title: "پیمانکار", link: "/dashboard/contracting-party", icon: faPencilSquare },
     ];
 
     return (

@@ -1,3 +1,4 @@
+'use client';
 import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
@@ -8,3 +9,16 @@ export const DeleteButton=({onTouch})=>{
 export const EditButton=({onTouch})=>{
     return <button onClick={onTouch} className="px-4 py-2 bg-blue-500 text-white font-semibold rounded-md shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50"><FontAwesomeIcon icon={faPen}  className="text-white" ></FontAwesomeIcon></button>
 }
+
+
+export const PrimaryButton = ({ onClick, icon = null, children }) => {
+    return (
+        <button
+            onClick={onClick}
+            className="px-4 py-2 bg-sky-500 text-white font-semibold rounded-md shadow-md hover:bg-sky-600 focus:outline-none focus:ring-2 focus:ring-sky-400 focus:ring-opacity-50"
+        >
+            {icon && <FontAwesomeIcon icon={icon} className="text-white mr-2" />}
+               {children}
+        </button>
+    );
+};
