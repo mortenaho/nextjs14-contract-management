@@ -79,6 +79,39 @@ export function useContracingPartyService() {
         return result;
     }
 
+    async function  Deleted(id: number) {
+        setServiceStatus(null)
+        setLoading(true);
+        const headers = new Headers({
+            "Content-Type": "application/json",
+            "Authorization": `${token?.tokenType} ${token?.accessToken}`
+        });
+
+
+        try {
+            const response = await fetch("http://localhost:5251/api/v1/ContractingParty/delete/"+id, {
+                method: "delete",
+                headers: headers,
+            })
+            // Handle the response if needed
+            if (response.ok) {
+
+                const res: GeneralResponse = await response.json() as GeneralResponse
+                if (res.responseCode === 100)
+                    setServiceStatus({ message: res.responseMessage, isSuccess: true })
+                else
+                    setServiceStatus({ message: res.responseMessage, isSuccess: false })
+
+
+            } else {
+                setServiceStatus({ message: response.statusText, isSuccess: false })
+            }
+            setLoading(false)
+        } catch (error) {
+            setLoading(false)
+            setServiceStatus({ message: error instanceof Error ? error.message : "An unknown error occurred", isSuccess: false })
+        }
+    }
     async function GetAll() {
         setServiceStatus(null);
         setLoading(true);
@@ -203,5 +236,5 @@ export function useContracingPartyService() {
         }
     };
 
-    return { register, handleSubmit, formState: { errors }, GetById, Add, Update, loading, serviceStatus,contractingParty ,setValue,reset,getValues,clearErrors,GetAll};
+    return { register, handleSubmit, formState: { errors }, GetById, Add, Update, loading,Deleted, serviceStatus,contractingParty ,setValue,reset,getValues,clearErrors,GetAll};
 }
