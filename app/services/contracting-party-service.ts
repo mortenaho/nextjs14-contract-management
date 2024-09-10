@@ -13,6 +13,7 @@ import { AddContractRequest } from "@/app/dtos/request/add-contract-request";
 import { ServiceStatus } from "@/app/models/service-status";
 import { ContractModel } from "@/app/dtos/response/contract";
 import { ContractingParty } from "../dtos/request/contracting-party";
+import { ContractingPartyFromValidation } from "../util/form-validation/contractin-partiy-validation";
 
 
 
@@ -25,7 +26,7 @@ export function useContracingPartyService() {
  
      
     const { register, handleSubmit, formState: { errors } , setValue, reset,getValues,clearErrors} = useForm({
-        resolver: yupResolver(AddContractFromValidation),
+        resolver: yupResolver(ContractingPartyFromValidation),
     });
 
     useEffect(function () {
@@ -207,15 +208,18 @@ export function useContracingPartyService() {
 
 
         try {
+            
             const response = await fetch("http://localhost:5251/api/v1/ContractingParty/Add", {
                 method: "POST",
                 headers: headers,
                 body: JSON.stringify({
-                    "ContractingPartyName": formdata.contractingPartyName,
-                    "IsLegal": formdata.isLegal,
-                    "NationalCode": formdata.nationalCode
-                }),
+                    "contractingPartyId": 0,
+                    "contractingPartyName": formdata.contractingPartyName,
+                    "isLegal": formdata.isLegal as boolean,
+                    "nationalCode": formdata.nationalCode as number
+                  }),
             })
+
             // Handle the response if needed
             if (response.ok) {
 
@@ -236,5 +240,5 @@ export function useContracingPartyService() {
         }
     };
 
-    return { register, handleSubmit, formState: { errors }, GetById, Add, Update, loading,Deleted, serviceStatus,contractingParty ,setValue,reset,getValues,clearErrors,GetAll};
+    return { register, handleSubmit,  errors , GetById, Add, Update, loading,Deleted, serviceStatus,contractingParty ,setValue,reset,getValues,clearErrors,GetAll};
 }

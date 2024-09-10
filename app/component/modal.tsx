@@ -1,3 +1,5 @@
+import { faClose } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
 
 // components/Modal.js
@@ -29,15 +31,12 @@ const Modal = ({ isOpen, closeModal, title, content ,size}) => {
         {isOpen && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 ">
             <div className={`bg-white rounded-lg shadow-lg ${width} p-6 relative slide-up`}>
+              <span onClick={closeModal} className="absolute left-4 top-4 text-black hover:cursor-pointer">
+                <FontAwesomeIcon icon={faClose}/>
+              </span>
               <h2 className="text-2xl text-black font-bold mb-4">{title || 'Modal Title'}</h2>
               <p className="mb-4 text-black">{content || 'This is the default content of the modal.'}</p>
               
-              <button
-                className="bg-red-500 text-white px-4 py-2 rounded"
-                onClick={closeModal}
-              >
-                بستن
-              </button>
             </div>
           </div>
         )}
